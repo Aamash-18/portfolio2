@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,13 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navbar  -->
     <div class="navbar">
-        <div class="logo" style="font-family:Josefin Sans;"><p>Aamash <span id="dot">.</span></p></div>
+        <div class="logo" style="font-family:Josefin Sans;">
+            <p>Aamash <span id="dot">.</span></p>
+        </div>
         <div class="navitems">
             <div>HOME<span id="dot"> .</span></div>
             <div>ABOUT<span id="dot"> .</span></div>
@@ -23,22 +27,30 @@
         <div class="hamburger" onclick="toggleNavbar()">☰</div>
     </div>
 
-
-
     <!-- homePage -->
-     <div class="homepage">
+    <div class="homepage">
         <div class="myimage">
             <img src="./img/copy2.png" id="frontimage" alt="">
         </div>
         <div class="details">
-            <div class="hello"><p>Hello, I'm a</p></div>
-            <div class="coder"><p>Web Develper</p></div>
-            <div class="college"><p>Student at NIT Jamshedpur with high level of skills in web Developement. 
-                5 start on Hacker Rank Problem Solving and c++.Want to improve my skills and contribute to open Source Society</p>
+            <div class="hello">
+                <p>Hello, I'm a</p>
+            </div>
+            <div class="coder">
+                <p id="typewriter"></p>
+            </div>
+            <div class="college">
+                <p>Student at NIT Jamshedpur with high level of skills in web Developement.
+                    5 star on HackerRank Problem Solving and C++. Want to improve my skills and contribute to Open
+                    Source Society.</p>
             </div>
             <div class="btns">
-                <div class="btn hire"><p>Hire Me</p></div>
-                <div class="btn resume"><p>Resume</p></div>
+                <div class="btn hire">
+                    <p>Hire Me</p>
+                </div>
+                <div class="btn resume">
+                    <p>Resume <i class="fa-solid fa-download"></i></p>
+                </div>
             </div>
             <div class="links">
                 <a href="https://github.com/Aamash-18" target="_blank">
@@ -50,10 +62,57 @@
                 <a href="https://www.instagram.com/aamash.ansari__/" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
-                
             </div>
         </div>
-     </div>
-    <script src="script.js"></script>
+    </div>
+
+    <script>
+        const words = ["Web Developer", "Coder", "Programmer"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const speed = 150; // Typing speed
+        const eraseSpeed = 100; // Erasing speed
+        const delay = 1000; // Delay before deleting
+        document.addEventListener("DOMContentLoaded", function () {
+            const coderElement = document.querySelector(".coder p");
+            const words = ["Web Developer", "Coder", "Programmer"];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const typingSpeed = 150;
+            const deletingSpeed = 80;
+            const delayBetweenWords = 1000;
+
+            // Set a minimum width to avoid layout shifting
+            coderElement.style.display = "inline-block";
+            coderElement.style.minWidth = "12ch"; // Adjust this based on the longest word
+
+            function typeEffect() {
+                const currentWord = words[wordIndex];
+                if (!isDeleting) {
+                    coderElement.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                    if (charIndex === currentWord.length) {
+                        isDeleting = true;
+                        setTimeout(typeEffect, delayBetweenWords);
+                        return;
+                    }
+                } else {
+                    coderElement.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        wordIndex = (wordIndex + 1) % words.length;
+                    }
+                }
+                setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+            }
+
+            typeEffect();
+        });
+
+    </script>
 </body>
+
 </html>
